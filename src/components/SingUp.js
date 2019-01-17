@@ -1,13 +1,31 @@
 import React, { Component } from "react";
+import axios from "axios";
 
 class SingUp extends Component {
   constructor() {
     super();
     this.state = {};
+    this.errors=[]
   }
 
   submit = e => {
-    console.log(e);
+    if (this.state.email != "" && this.state.password != "") {
+      if (this.state.password === this.state.password_confirmation) {
+        axios
+          .post("/registration", this.state)
+          .then(function(response) {
+            // console.log(response);
+          })
+          .catch(function(error) {
+            console.log(error);
+          });
+      }else{
+
+        this.state.errors.push("Registration failed, make sure you repeat the same password")
+      }
+    }else{
+      this.state.errors.push("Registration failed. Make sure you write a valid email and password")
+    }
   };
 
   getFormData = e => {
@@ -21,7 +39,10 @@ class SingUp extends Component {
     return (
       <div className="container">
         <div className="row w-75 mx-auto mt-5 pt-5">
-          <form method="POST" action="/" role="form" onSubmit={this.submit}>
+          <form
+            role="form"
+            onSubmit={this.submit}
+          >
             <h2 className="text-center">Sign Up</h2>
             <hr className="colorgraph" />
             <div className="row">
@@ -185,6 +206,10 @@ class SingUp extends Component {
             </div>
           </form>
         </div>
+        {this.errors.map(err=>(
+          <div>{err}</div>
+
+        ))}
       </div>
     );
   }
