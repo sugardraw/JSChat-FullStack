@@ -1,6 +1,7 @@
 const express = require("express");
 const app = express();
 const http = require("http");
+const mongoose = require("mongoose");
 
 const morgan = require("morgan");
 const bodyParser = require("body-parser");
@@ -13,6 +14,27 @@ const webpack = require("webpack");
 
 const socketIo = require("socket.io");
 
+mongoose.connect("mongodb://localhost/JSchatDB");
+let db = mongoose.connection;
+
+/**
+ *
+ * check connection
+ */
+db.once("open", function() {
+  console.log("connected to mongoDB");
+});
+
+/**
+ * check for db errors
+ */
+db.on("error", function(err) {
+  console.log(err);
+});
+
+/**
+ * creating a server from http module
+ */
 const server = http.createServer(app);
 
 /**
