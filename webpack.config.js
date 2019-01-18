@@ -83,7 +83,7 @@ module.exports = {
   plugins: [
     new ExtractTextPlugin({
       // define where to save the file
-      filename: "/styles/style.css",
+      filename: "/css/styles.css",
       allChunks: true
     })
   ]

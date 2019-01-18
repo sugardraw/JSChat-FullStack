@@ -74,6 +74,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 // set static files
 app.use(express.static(path.join(__dirname, "public")));
 
+
+
 // starting the server
 server.listen(app.get("port"), () => {
   console.log(`server listening on port ${app.get("port")}`);
