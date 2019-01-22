@@ -16,10 +16,10 @@ const webpack = require("webpack");
 //setting log colors
 var colors = require("colors");
 
-
-
-
-mongoose.connect("mongodb://localhost:27017/JSchatDB",{ useNewUrlParser: true });
+mongoose.connect(
+  "mongodb://localhost:27017/JSChatDataBase",
+  { useNewUrlParser: true }
+);
 let db = mongoose.connection;
 
 /**
@@ -67,14 +67,13 @@ app.use(bodyParser.json());
 app.use(require("./routes/index"));
 app.use(morgan("dev"));
 
-
 app.use(webpackDevMiddleware(webpack(webpackConfig)));
 app.use(bodyParser.urlencoded({ extended: false }));
 
 // set static files
 app.use(express.static(path.join(__dirname, "public")));
 
-
+mongoose.set("useCreateIndex", true);
 
 // starting the server
 server.listen(app.get("port"), () => {

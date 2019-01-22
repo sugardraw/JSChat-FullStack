@@ -4,11 +4,17 @@ import axios from "axios";
 class SingIn extends Component {
   constructor() {
     super();
-    this.state = {};
+    this.state = {
+      errors: ""
+    };
+    this.renderErrors = str => {
+      return str;
+    };
   }
 
   submit = e => {
-    if (this.state.email != "" && this.state.password != "") {
+    e.preventDefault();
+    if (this.state.email != undefined && this.state.password != undefined) {
       axios
         .post("/login", this.state)
         .then(function(response) {
@@ -17,6 +23,8 @@ class SingIn extends Component {
         .catch(function(error) {
           console.log("error:", error);
         });
+    } else {
+      this.setState({ errors: "Please, fill both fields" });
     }
   };
 
@@ -38,6 +46,12 @@ class SingIn extends Component {
             onSubmit={this.submit}
           >
             <h2 className="text-center">Sign In</h2>
+            <hr className="colorgraph" />
+            {this.state.errors == "" || (
+              <div className="card bg-warning p-2 text-center">
+                {this.renderErrors(this.state.errors)}
+              </div>
+            )}
             <hr className="colorgraph" />
             <div className="row">
               <div className="col-xs-12 col-sm-6 col-md-12">
