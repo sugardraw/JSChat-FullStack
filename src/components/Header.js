@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 class Header extends Component {
   render() {
     return (
-      <div className="header">
+      <div className="header shadow">
         <div id="logo">
           <img
             className="m-2"
@@ -14,7 +14,7 @@ class Header extends Component {
             alt="logo"
           />
           <span>
-            FullStack<em>Chat</em>
+            [FullStack].<em className="text-success">Chat</em>
           </span>
 
           <div className="window-buttons float-right">

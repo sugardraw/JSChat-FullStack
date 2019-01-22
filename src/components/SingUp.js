@@ -1,13 +1,47 @@
 import React, { Component } from "react";
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+
+import axios from "axios";
 
 class SingUp extends Component {
   constructor() {
     super();
-    this.state = {};
+    this.state = {
+      errors: ''
+    };
+    this.renderErrors = str => {
+      return str;
+    };
   }
 
   submit = e => {
-    console.log(e);
+    e.preventDefault();
+    if (this.state.email != undefined && this.state.password != undefined) {
+      if (this.state.password === this.state.password_confirmation) {
+        this.setState({
+          errors:
+            "Registration Succeeded!!\n you will be redirected to your Chatroom in few seconds"
+        });
+        axios
+          .post("/registration", this.state)
+          .then(function(response) {
+            console.log("response from server", response);
+            setTimeout(() => {
+              window.location.replace("http://localhost:8080");
+            }, 4000);
+          })
+          .catch(function(error) {
+            console.log("error:", error);
+          });
+      } else {
+        this.setState({
+          errors: "Please, be sure you repeated correctly your password"
+        });
+      }
+    } else {
+      this.setState({ errors: "Please, fill all fields" });
+    }
+    e.target.reset();
   };
 
   getFormData = e => {
@@ -20,9 +54,20 @@ class SingUp extends Component {
   render() {
     return (
       <div className="container">
-        <div className="row w-75 mx-auto mt-5 pt-5">
-          <form method="POST" action="/" role="form" onSubmit={this.submit}>
+        <div className="row w-50 mx-auto mt-5 pt-5">
+          <form
+            method="POST"
+            action="/registration"
+            role="form"
+            onSubmit={this.submit}
+          >
             <h2 className="text-center">Sign Up</h2>
+            <hr className="colorgraph" />
+            {this.state.errors == "" || (
+              <div className="card bg-warning p-2 text-center">
+                {this.renderErrors(this.state.errors)}
+              </div>
+            )}
             <hr className="colorgraph" />
             <div className="row">
               <div className="col-xs-12 col-sm-6 col-md-6">
@@ -136,35 +181,7 @@ class SingUp extends Component {
               </div>
             </div>
             <div className="row">
-              <div className="col-xs-4 col-sm-3 col-md-3">
-                <span className="button-checkbox">
-                  <button
-                    type="button"
-                    className="btn"
-                    data-color="info"
-                    tabIndex="7"
-                  >
-                    I Agree
-                  </button>
-                  <input
-                    type="checkbox"
-                    name="t_and_c"
-                    id="t_and_c"
-                    className="hidden"
-                    value="1"
-                    onChange={this.getFormData}
-                  />
-                </span>
-              </div>
-              <div className="col-xs-8 col-sm-9 col-md-9">
-                By clicking{" "}
-                <strong className="label label-primary">Register</strong>, you
-                agree to the{" "}
-                <a href="#" data-toggle="modal" data-target="#t_and_c_m">
-                  Terms and Conditions
-                </a>{" "}
-                set out by this site, including our Cookie Use.
-              </div>
+              <div className="col-xs-8 col-sm-9 col-md-9" />
             </div>
 
             <hr className="colorgraph" />
@@ -178,9 +195,11 @@ class SingUp extends Component {
                 />
               </div>
               <div className="col-xs-12 col-md-6">
-                <a href="#" className="btn btn-success btn-block btn-lg">
-                  Sign In
-                </a>
+                <Link to="/singin">
+                  <button className="btn btn-primary btn-block btn-lg">
+                    Sign In
+                  </button>
+                </Link>
               </div>
             </div>
           </form>

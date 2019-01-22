@@ -1,6 +1,8 @@
 const express = require("express");
 const app = express();
 const http = require("http");
+const mongoose = require("mongoose");
+const socketIo = require("socket.io");
 
 const morgan = require("morgan");
 const bodyParser = require("body-parser");
@@ -11,8 +13,34 @@ const webpackDevMiddleware = require("webpack-dev-middleware");
 const webpackConfig = require("../webpack.config");
 const webpack = require("webpack");
 
-const socketIo = require("socket.io");
+//setting log colors
+var colors = require("colors");
 
+mongoose.connect(
+  "mongodb://localhost:27017/JSChatDataBase",
+  { useNewUrlParser: true }
+);
+let db = mongoose.connection;
+
+/**
+ * check connection
+ */
+
+db.once("open", function() {
+  console.log("connected to mongoDB".underline.yellow);
+});
+
+/**
+ * check for db errors
+ */
+
+db.on("error", function(err) {
+  console.log(err);
+});
+
+/**
+ * creating a server from http module
+ */
 const server = http.createServer(app);
 
 /**
@@ -27,14 +55,25 @@ app.set("port", process.env.PORT || 8080);
 
 /**
  *
- * middleware
+ * middlewares
  * */
+app.use(
+  bodyParser.urlencoded({
+    extended: false
+  })
+);
+app.use(bodyParser.json());
+
+app.use(require("./routes/index"));
+app.use(morgan("dev"));
 
 app.use(webpackDevMiddleware(webpack(webpackConfig)));
 app.use(bodyParser.urlencoded({ extended: false }));
 
 // set static files
 app.use(express.static(path.join(__dirname, "public")));
+
+mongoose.set("useCreateIndex", true);
 
 // starting the server
 server.listen(app.get("port"), () => {
