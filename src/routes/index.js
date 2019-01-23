@@ -41,6 +41,7 @@ router.post("/registration", (req, res) => {
 });
 router.post("/login", (req, res) => {
   delete req.body["errors"];
+  delete req.body["token"];
   // 1. Receive email id and password
 
   let { email, password } = req.body;
@@ -58,6 +59,7 @@ router.post("/login", (req, res) => {
         if (err) throw err;
         console.log(password, isMatch);
         if (isMatch) {
+
           const userSession = new UserSession();
           userSession.userId = user._id;
           userSession.save((err, doc) => {
@@ -79,14 +81,16 @@ router.post("/login", (req, res) => {
         } else {
           return res.send({
             success: false,
-            message: "Sorry, you can't access your Chatroom. Try it again"
+            message:
+              "Sorry, you can't access the Chatroom. Make sure you give the correct Email and Password"
           });
         }
       });
     } else {
       return res.send({
         success: false,
-        message: "Sorry, you can't access your Chatroom. Try it again"
+        message:
+          "Sorry, you can't access your Chatroom. Are you already registered?"
       });
     }
   });

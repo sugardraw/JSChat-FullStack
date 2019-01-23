@@ -1,7 +1,7 @@
 @import "../../node_modules/bootstrap/scss/bootstrap";
 
 body {
-  background-color: #3ba58b;
+  background-color:#8b90b9;
 }
 
 .header {
@@ -54,4 +54,33 @@ input[value="Register"] {
   background-color: #226bcd !important;
 
 
+}
+
+/**
+chatroom
+*/
+.card{
+  background-color:#8b90b9;
+}
+#loggedUser{
+  background-color:#9dd1ff;
+}
+
+#personal-settings{
+  button{
+    font-size: 1.8rem;
+    color: rgb(255, 255, 255);
+    background-color: #9dd1ff;
+    position: relative;
+    top: 0rem;
+    margin-left: 0.8rem;
+    &:hover {
+      background-color: #ffc107 !important;
+  }
+
+  }
+}
+
+.icons-chatbox{
+  font-size: 2rem;
 }

@@ -6922,7 +6922,7 @@ a.text-dark:hover, a.text-dark:focus {
     border-color: #dee2e6; } }
 
 body {
-  background-color: #3ba58b; }
+  background-color: #8b90b9; }
 
 .header {
   background-color: #ffeaec;
@@ -6962,3 +6962,25 @@ input[value="Register"] {
 
 .row:last-of-type div > a {
   background-color: #226bcd !important; }
+
+/**
+chatroom
+*/
+.card {
+  background-color: #8b90b9; }
+
+#loggedUser {
+  background-color: #9dd1ff; }
+
+#personal-settings button {
+  font-size: 1.8rem;
+  color: white;
+  background-color: #9dd1ff;
+  position: relative;
+  top: 0rem;
+  margin-left: 0.8rem; }
+  #personal-settings button:hover {
+    background-color: #ffc107 !important; }
+
+.icons-chatbox {
+  font-size: 2rem; }
