@@ -71,7 +71,21 @@ app.use(webpackDevMiddleware(webpack(webpackConfig)));
 app.use(bodyParser.urlencoded({ extended: false }));
 
 // set static files
+
 app.use(express.static(path.join(__dirname, "public")));
+
+app.use("/signin", function(req, res, next) {
+  res.sendFile("index.html", { root: path.join(__dirname, "public") });
+});
+app.use("/registration", function(req, res, next) {
+  res.sendFile("index.html", { root: path.join(__dirname, "public") });
+});
+app.use("/signup", function(req, res, next) {
+  res.sendFile("index.html", { root: path.join(__dirname, "public") });
+});
+app.use("/chatroom", function(req, res, next) {
+  res.sendFile("index.html", { root: path.join(__dirname, "public") });
+});
 
 mongoose.set("useCreateIndex", true);
 

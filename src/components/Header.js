@@ -18,12 +18,12 @@ class Header extends Component {
           </span>
 
           <div className="window-buttons float-right">
-            <Link to="/singup">
+            <Link to="/signup">
               <button className="btn">
                 <span>Sign Up</span>
               </button>
             </Link>
-            <Link to="/singin">
+            <Link to="/signin">
               {" "}
               <button className="btn last-button">
                 <span>Sign In</span>

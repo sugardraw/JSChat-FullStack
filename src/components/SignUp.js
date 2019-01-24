@@ -7,7 +7,7 @@ class SingUp extends Component {
   constructor() {
     super();
     this.state = {
-      errors: ''
+      errors: ""
     };
     this.renderErrors = str => {
       return str;
@@ -20,15 +20,15 @@ class SingUp extends Component {
       if (this.state.password === this.state.password_confirmation) {
         this.setState({
           errors:
-            "Registration Succeeded!!\n you will be redirected to your Chatroom in few seconds"
+            "Registration Succeeded!!\n Log in your Chatroom"
         });
         axios
           .post("/registration", this.state)
           .then(function(response) {
             console.log("response from server", response);
             setTimeout(() => {
-              window.location.replace("http://localhost:8080");
-            }, 4000);
+              window.location.replace("http://localhost:8080/signin");
+            }, 3000);
           })
           .catch(function(error) {
             console.log("error:", error);
