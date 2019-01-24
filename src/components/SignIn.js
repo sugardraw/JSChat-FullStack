@@ -24,10 +24,20 @@ class SignIn extends Component {
         .then(response => {
           console.log(response);
           this.setState({ errors: response.data.message });
-
-          response.data.token
-            ? this.setState({ token: response.data.token })
+          return response.data;
+        })
+        /**
+         * saving state in the local storage in order to prevent
+         * losing data on redirecting.
+         */
+        .then(data => {
+          data.token
+            ? this.setState({
+                token: data.token
+              })
             : null;
+
+          localStorage.setItem("data", JSON.stringify(data));
         })
         .catch(function(error) {
           console.log("error:", error);
@@ -48,15 +58,24 @@ class SignIn extends Component {
   };
 
   redirectToTarget = () => {
-    console.log(this.context);
     this.context.router.history.push("/chatroom");
   };
+
   render() {
-    if (this.state.token != null) {
+    if (this.state.token) {
       {
-        this.redirectToTarget();
+        setTimeout(() => {
+          this.redirectToTarget();
+          return;
+
+          <ChatRoom />;
+        }, 3000);
       }
-      return <ChatRoom token={this.state.token}/>;
+      return (
+        <div className="container">
+          <div id="loader-icon" />
+        </div>
+      );
     } else {
       return (
         <div className="container">

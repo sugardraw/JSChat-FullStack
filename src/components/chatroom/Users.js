@@ -1,14 +1,15 @@
 import React, { Component } from "react";
 import User from "./User";
+import MessagesInput from "./User";
 import axios from "axios";
 
 class Users extends Component {
   constructor() {
     super();
-    this.state = {};
+    this.state = {
+      data: null
+    };
   }
-
-  componentWillMount() {}
 
   render() {
     return (
@@ -16,8 +17,9 @@ class Users extends Component {
         className="col-md-3 m-0 p-0 bg-warning"
         style={{
           overflowY: "auto",
-          height: "1000px",
-          boxShadow: "-4px 24px 24px 10px #776f6fb0"
+          minHeight: "200px",
+          boxShadow: "-4px 24px 24px 10px #776f6fb0",
+          borderRadius:"5px"
         }}
       >
         <div id="loggedUser" className="card">
@@ -29,7 +31,6 @@ class Users extends Component {
               alt="contact"
               className="float-left rounded-circle m-1"
             />
-            YOU
             <div id="personal-settings">
               <button className="float-right btn">...</button>
               <button className="float-right btn">
@@ -38,7 +39,7 @@ class Users extends Component {
                     fontSize: "1.8rem",
                     color: "white",
                     position: "relative",
-                    top: "0.51rem",
+                    top: "0.51rem"
                   }}
                 >
                   {" "}
@@ -50,6 +51,7 @@ class Users extends Component {
         </div>
 
         <User />
+
       </div>
     );
   }

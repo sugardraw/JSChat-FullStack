@@ -75,7 +75,8 @@ router.post("/login", (req, res) => {
               success: true,
               message:
                 "Congratulations!, you will access your Chatroom in few seconds",
-              token: doc._id
+              token: doc._id,
+              userName:user.first_name
             });
           });
         } else {
