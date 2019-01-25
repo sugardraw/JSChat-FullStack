@@ -7042,3 +7042,21 @@ chatroom
 
 .message-input div {
   margin: 0px 10px 0px 5px !important; }
+
+.message-bubble {
+  border-radius: 25px;
+  background-color: #9dd1ff;
+  min-width: 200px;
+  min-height: 100px;
+  position: relative; }
+  .message-bubble:after {
+    transform: rotateZ(-36deg);
+    content: "";
+    position: absolute;
+    right: 93%;
+    bottom: 3%;
+    width: 5px;
+    height: 0;
+    border-top: 6px solid transparent;
+    border-right: 32px solid #9dd1ff;
+    border-bottom: 16px solid transparent; }

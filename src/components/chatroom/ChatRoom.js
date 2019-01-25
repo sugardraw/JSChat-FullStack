@@ -22,7 +22,7 @@ class ChatRoom extends Component {
 
           <div className="row">
             <Users data={JSON.parse(localStorage.getItem("data"))} />
-            <MessagesInput />
+            <MessagesInput data={JSON.parse(localStorage.getItem("data"))}/>
             <div className="col-md-3 w-100 fixed-bottom">
               {" "}
               <p className="text-muted fixed-bottom p-4">

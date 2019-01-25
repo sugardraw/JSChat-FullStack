@@ -7,10 +7,17 @@ module.exports = function(io) {
       colors.underline.grey(socket.id)
     );
     socket.on("message", body => {
-      socket.broadcast.emit("message", {
-        body,
-        from: socket.id.slice(8)
+      const { msgBody, from } = body;
+      io.sockets.emit("message", {
+        msgBody,
+        from: from
       });
+    });
+    socket.on("chat:typing", (data)=> {
+      socket.broadcast.emit('chat:typing', data)
+    });
+    socket.on("disconnect", function() {
+      console.log("user disconnected");
     });
   });
 };
