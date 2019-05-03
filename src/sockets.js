@@ -9,10 +9,12 @@ module.exports = function(io) {
 
 
     );
-    socket.on("message", body => {
-      const { msgBody, from } = body;
+    socket.on("message", data => {
+      const { timeStamp, body, from } = data;
+      console.log(timeStamp, body, from)
       socket.broadcast.emit("message", {
-        msgBody,
+        timeStamp,
+        body,
         from: from
       });
     });

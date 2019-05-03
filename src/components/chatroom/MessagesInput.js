@@ -7,7 +7,6 @@ class MessagesInput extends Component {
     super();
     this.state = {
       messages: [],
-      myMsg: [],
       action: ""
     };
   }
@@ -15,7 +14,6 @@ class MessagesInput extends Component {
   componentDidMount() {
     this.socket = io("/");
     this.socket.on("chat:typing", action => {
-      console.log("****", action);
       this.setState({
         action: action.userName
       });
@@ -23,10 +21,11 @@ class MessagesInput extends Component {
     this.socket.on("sender", userId => {
       console.log("****", userId);
     });
-    this.socket.on("message", message => {
+    this.socket.on("message", incomingMessage => {
+      console.log("incoming msg:", incomingMessage);
       this.setState(
         {
-          messages: [message, ...this.state.messages]
+          messages: [incomingMessage, ...this.state.messages]
         },
         this.setState({
           action: ""
@@ -36,63 +35,87 @@ class MessagesInput extends Component {
   }
 
   handleSubmit = e => {
+    console.log("e.type", typeof e.type, e.type, e.target.type);
     this.socket.emit("chat:typing", this.props.data);
     const msgBody = e.target.value;
- 
+
     if (e.keyCode === 13 && msgBody) {
-      const myMessage={
+      console.log("e.type", e.type);
+      const myMessage = {
         timeStamp: Date.now(),
-        body:msgBody
-      }
+        body: msgBody,
+        from: "Me"
+      };
       this.setState({
-        myMsg: [myMessage, ...this.state.myMsg]
+        messages: [myMessage, ...this.state.messages]
       });
-      const message = {
-        msgBody,
+      let yourMessage = {
+        timeStamp: Date.now(),
+        body: msgBody,
         from: this.props.data.userName
       };
-      this.socket.emit("message", message);
+      this.socket.emit("message", yourMessage);
       e.target.value = "";
+    }
+    if (e.type == "click") {
+      console.log("e.type", e.type);
+      let msg = document.querySelector("#message-input").value;
+      const myMessage = {
+        timeStamp: Date.now(),
+        body: msg,
+        from: "Me"
+      };
+      this.setState({
+        messages: [myMessage, ...this.state.messages]
+      });
+      let yourMessage = {
+        timeStamp: Date.now(),
+        body: msg,
+        from: this.props.data.userName
+      };
+      this.socket.emit("message", yourMessage);
+      msg = "";
     }
   };
   render() {
     const messages = this.state.messages.map((message, i) => {
-      return (
-        <table>
-          <tr>
-            <td className="m-3 col-xs-12 col-sm-8 col-md-8 w-100" />
-            <td className="m-3 col-xs-12 col-sm-4 col-md-4 w-100">
-              <div className="message-bubble m-3 col-xs-12 col-sm-3 col-md-3">
-                <div className="px-2 pt-1" key={i}>
-                  <em>from &#32; </em>
-                  <b>{message.from}:</b>
-                  <hr className="colorgraph" />
-                  <div>{message.msgBody}</div>
+      if (message.from === "Me") {
+        return (
+          <table key={i}>
+            <tr>
+              <td className="m-3 col-xs-12 col-sm-4 col-md-4 w-100">
+                <div className="my-message-bubble m-3 col-xs-12 col-sm-3 col-md-3">
+                  <div className="px-2 pt-1">
+                    <em>from &#32; </em>
+                    <b>{message.from}:</b>
+                    <hr className="colorgraph" />
+                    <div>{message.body}</div>
+                  </div>
                 </div>
-              </div>
-            </td>
-          </tr>
-        </table>
-      );
-    });
-    const myMessages = this.state.myMsg.map((message, i) => {
-      return (
-        <table>
-          <tr>
-            <td className="m-3 col-xs-12 col-sm-4 col-md-4 w-100">
-              <div className="my-message-bubble m-3 col-xs-12 col-sm-3 col-md-3">
-                <div className="px-2 pt-1">
-                  <em>from &#32; </em>
-                  <b>{"Me"}:</b>
-                  <hr className="colorgraph" />
-                  <div>{message.body}</div>
+              </td>
+              <td className="m-3 col-xs-12 col-sm-8 col-md-8 w-100" />
+            </tr>
+          </table>
+        );
+      } else {
+        return (
+          <table key={i+1}>
+            <tr>
+              <td className="m-3 col-xs-12 col-sm-8 col-md-8 w-100" />
+              <td className="m-3 col-xs-12 col-sm-4 col-md-4 w-100">
+                <div className="message-bubble m-3 col-xs-12 col-sm-3 col-md-3">
+                  <div className="px-2 pt-1" key={i}>
+                    <em>from &#32; </em>
+                    <b>{message.from}:</b>
+                    <hr className="colorgraph" />
+                    <div>{message.body}</div>
+                  </div>
                 </div>
-              </div>
-            </td>
-            <td className="m-3 col-xs-12 col-sm-8 col-md-8 w-100" />
-          </tr>
-        </table>
-      );
+              </td>
+            </tr>
+          </table>
+        );
+      }
     });
 
     return (
@@ -105,8 +128,7 @@ class MessagesInput extends Component {
             </div>
           )}
 
-          {myMessages}
-          {messages}
+          <div className="d-flex flex-column ">{messages}</div>
         </div>
 
         <div className="messages col-md-9">
@@ -146,6 +168,7 @@ class MessagesInput extends Component {
                 borderRadius: "50%",
                 padding: "6px"
               }}
+              onClick={this.handleSubmit.bind(this)}
             >
               <FaPaperPlane size={19} />
             </div>

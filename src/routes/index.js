@@ -30,7 +30,7 @@ router.post("/registration", (req, res) => {
         userData.password = userData.generateHash(req.body.password);
 
         userData.save();
-        return res.send("Registration succeeded!!!!");
+        return res.send({ msg: "Registration succeeded!!!!", data: userData });
       }
     });
   } else {
@@ -59,7 +59,6 @@ router.post("/login", (req, res) => {
         if (err) throw err;
         console.log(password, isMatch);
         if (isMatch) {
-
           const userSession = new UserSession();
           userSession.userId = user._id;
           userSession.save((err, doc) => {
@@ -75,8 +74,8 @@ router.post("/login", (req, res) => {
               success: true,
               message:
                 "Congratulations!, you will access your Chatroom in few seconds",
-              token: doc._id,
-              userName:user.first_name
+              token: doc.userId,
+              userName: user.first_name
             });
           });
         } else {

@@ -22,41 +22,26 @@ mongoose.connect(
 );
 let db = mongoose.connection;
 
-/**
- * check connection
- */
 
 db.once("open", function() {
   console.log("connected to mongoDB".underline.yellow);
 });
 
-/**
- * check for db errors
- */
 
 db.on("error", function(err) {
   console.log(err);
 });
 
-/**
- * creating a server from http module
- */
+
 const server = http.createServer(app);
 
-/**
- * implementing socketIo for chat
- *
- */
 
 const io = socketIo(server);
 require("./sockets.js")(io);
 
 app.set("port", process.env.PORT || 8080);
 
-/**
- *
- * middlewares
- * */
+
 app.use(
   bodyParser.urlencoded({
     extended: false
@@ -70,7 +55,7 @@ app.use(morgan("dev"));
 app.use(webpackDevMiddleware(webpack(webpackConfig)));
 app.use(bodyParser.urlencoded({ extended: false }));
 
-// set static files
+
 
 app.use(express.static(path.join(__dirname, "public")));
 

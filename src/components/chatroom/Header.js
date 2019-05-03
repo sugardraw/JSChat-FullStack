@@ -13,6 +13,7 @@ class Header extends Component {
   }
 
   static getDerivedStateFromProps(nextProps, prevState) {
+    console.log(nextProps, prevState)
     if (nextProps.data !== prevState.data) {
       return { data: nextProps.data };
     } else {

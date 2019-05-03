@@ -6,9 +6,6 @@ import axios from "axios";
 class Users extends Component {
   constructor() {
     super();
-    this.state = {
-      data: null
-    };
   }
 
   render() {
@@ -19,10 +16,13 @@ class Users extends Component {
           overflowY: "auto",
           minHeight: "200px",
           boxShadow: "-4px 24px 24px 10px #776f6fb0",
-          borderRadius:"5px"
+          borderRadius: "5px"
         }}
       >
         <div id="loggedUser" className="card">
+          <div className="card-title">
+            
+          </div>
           <div className="card-body">
             <img
               src="./images/avatar.png"
@@ -51,7 +51,6 @@ class Users extends Component {
         </div>
 
         <User />
-
       </div>
     );
   }

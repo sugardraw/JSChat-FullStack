@@ -26,10 +26,7 @@ class SignIn extends Component {
           this.setState({ errors: response.data.message });
           return response.data;
         })
-        /**
-         * saving state in the local storage in order to prevent
-         * losing data on redirecting.
-         */
+
         .then(data => {
           data.token
             ? this.setState({
@@ -37,7 +34,7 @@ class SignIn extends Component {
               })
             : null;
 
-          localStorage.setItem("data", JSON.stringify(data));
+          sessionStorage.setItem("data", JSON.stringify(data));
         })
         .catch(function(error) {
           console.log("error:", error);
