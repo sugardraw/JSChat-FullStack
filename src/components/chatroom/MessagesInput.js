@@ -36,6 +36,7 @@ class MessagesInput extends Component {
 
   handleSubmit = e => {
     console.log("e.type", typeof e.type, e.type, e.target.type);
+    this.socket.emit("chat:typing", this.props.data);
     const msgBody = e.target.value;
 
     if (e.keyCode === 13 && msgBody) {
@@ -80,7 +81,7 @@ class MessagesInput extends Component {
     const messages = this.state.messages.map((message, i) => {
       if (message.from === "Me") {
         return (
-          <table key={i}>
+          <table>
             <tr>
               <td className="m-3 col-xs-12 col-sm-4 col-md-4 w-100">
                 <div className="my-message-bubble m-3 col-xs-12 col-sm-3 col-md-3">
@@ -98,7 +99,7 @@ class MessagesInput extends Component {
         );
       } else {
         return (
-          <table key={i+1}>
+          <table>
             <tr>
               <td className="m-3 col-xs-12 col-sm-8 col-md-8 w-100" />
               <td className="m-3 col-xs-12 col-sm-4 col-md-4 w-100">
