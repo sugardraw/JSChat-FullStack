@@ -51,9 +51,7 @@
     "style-loader": "^0.23.1",
     "uuid": "^3.3.2",
     "webpack": "^3.3.0",
-    "webpack-dev-middleware": "^1.11.0"
-  },
-  "devDependencies": {
+    "webpack-dev-middleware": "^1.11.0",
     "axios": "^0.18.0",
     "bootstrap": "^4.2.1",
     "jquery": "^3.3.1"
