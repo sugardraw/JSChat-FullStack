@@ -1,5 +1,8 @@
 {
   "name": "JSchat-fullstack",
+  "engines": {
+    "node": "10.15.1"
+  },
   "version": "1.0.0",
   "description": "",
   "main": "server.js",
