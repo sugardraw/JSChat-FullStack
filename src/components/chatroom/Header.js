@@ -1,8 +1,7 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import { IoIosContact, IoIosLogOut } from "react-icons/io";
-
-
+import io from "socket.io-client";
 
 class Header extends Component {
   constructor() {
@@ -13,6 +12,7 @@ class Header extends Component {
   }
 
   static getDerivedStateFromProps(nextProps, prevState) {
+    console.log(nextProps, prevState);
     if (nextProps.data !== prevState.data) {
       return { data: nextProps.data };
     } else {
@@ -20,11 +20,16 @@ class Header extends Component {
     }
   }
 
+  logOut = () => {
+    console.log("LOGOUT")
+    this.socket = io("/");
+    this.socket.emit("logout", this.props.data.userName);
+    sessionStorage.clear();
+  };
 
   render() {
     return (
       <div className="header shadow bg-warning">
-
         <div id="logo">
           <img
             className="m-2"
@@ -38,7 +43,7 @@ class Header extends Component {
           </span>
 
           <div className="window-buttons float-right">
-            <Link to="/">
+            <Link to="/" onClick={this.logOut}>
               {" "}
               <div className="mt-3 float-right">
                 <div style={{ color: "white" }}>
@@ -50,11 +55,7 @@ class Header extends Component {
               <div className="mt-3 float-right">
                 <div style={{ color: "white" }}>
                   Welcome
-                  <strong>
-
-                    {" " + this.props.data.userName + " "}
-
-                    </strong>
+                  <strong>{" " + this.props.data.userName + " "}</strong>
                   <IoIosContact size={30} />
                 </div>
               </div>

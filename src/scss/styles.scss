@@ -44,7 +44,6 @@ body {
 *
 *
 */
-
 input[value="Register"] {
   background-color: rgb(255, 234, 236);
   color: #226bcd !important;
@@ -54,22 +53,48 @@ input[value="Register"] {
 }
 
 /**
+users
+*/
+
+.rounded-circle {
+  color: white;
+}
+
+/**
 chatroom
 */
 .card {
   background-color: #8b90b9;
+}
+.card-body {
+  padding: 1.7rem;
 }
 #loggedUser {
   background-color: #9dd1ff;
 }
 
 #personal-settings {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+
+  .userName {
+    font-size: 1.3em;
+    margin-left: 1.7em;
+  }
+
+  .buttons {
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    margin-top: -0.7em;
+  }
+
   button {
-    font-size: 1.8rem;
+    font-size: 1.6rem;
     color: rgb(255, 255, 255);
     background-color: #9dd1ff;
     position: relative;
-    top: 0rem;
     margin-left: 0.8rem;
     &:hover {
       background-color: #ffc107 !important;
@@ -139,15 +164,67 @@ chatroom
   width: 90%;
 }
 
-.form-control{
-  display:inline !important;
+.form-control {
+  display: inline !important;
 }
-.postboard{
-  min-height:200px;
+.postboard {
+  min-height: 200px;
   background-color: rgba(0, 0, 0, 0.308);
+  flex: 0 0 100%;
 }
 .message-input {
   div {
     margin: 0px 10px 0px 5px !important;
+  }
+}
+
+.message-bubble {
+  border-radius: 25px;
+  background-color: #9dd1ff;
+  min-width: 200px;
+  min-height: 100px;
+  position: relative;
+  &:after {
+    transform: rotateZ(189deg);
+    content: "";
+    position: absolute;
+    right: -9%;
+    bottom: 6%;
+    width: 5px;
+    height: 0;
+    border-top: 6px solid transparent;
+    border-right: 32px solid #9dd1ff;
+    border-bottom: 16px solid transparent;
+  }
+  div b {
+    color: #898ebe;
+  }
+  div hr {
+    margin-top: -2px;
+  }
+}
+.my-message-bubble {
+  border-radius: 25px;
+  background-color: white;
+  min-width: 200px;
+  min-height: 100px;
+  position: relative;
+  &:after {
+    transform: rotateZ(-36deg);
+    content: "";
+    position: absolute;
+    right: 93%;
+    bottom: 3%;
+    width: 5px;
+    height: 0;
+    border-top: 6px solid transparent;
+    border-right: 32px solid white;
+    border-bottom: 16px solid transparent;
+  }
+  div b {
+    color: #898ebe;
+  }
+  div hr {
+    margin-top: -2px;
   }
 }

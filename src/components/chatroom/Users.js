@@ -1,16 +1,37 @@
 import React, { Component } from "react";
-import User from "./User";
-import MessagesInput from "./User";
-import axios from "axios";
+
+import { IoIosContact } from "react-icons/io";
+import io from "socket.io-client";
 
 class Users extends Component {
   constructor() {
     super();
     this.state = {
-      data: null
+      loggedUsers: [],
+      yourself: JSON.parse(sessionStorage.getItem("data"))
     };
   }
+  componentDidMount() {
+    this.socket = io("/");
+    this.socket.on("login", action => {
+      this.setState(state => {
+        state.loggedUsers.push(action.userName);
+      });
+    });
 
+    this.socket.on("logout", userName => {
+      console.log(userName);
+      this.setState(state => {
+        var index = state.loggedUsers.indexOf(userName);
+        if (index > -1) {
+          state.loggedUsers.splice(index, 1);
+          return state;
+        } else {
+          return null;
+        }
+      });
+    });
+  }
   render() {
     return (
       <div
@@ -19,38 +40,69 @@ class Users extends Component {
           overflowY: "auto",
           minHeight: "200px",
           boxShadow: "-4px 24px 24px 10px #776f6fb0",
-          borderRadius:"5px"
+          borderRadius: "5px"
         }}
       >
-        <div id="loggedUser" className="card">
-          <div className="card-body">
-            <img
-              src="./images/avatar.png"
-              width="50"
-              height="50"
-              alt="contact"
-              className="float-left rounded-circle m-1"
-            />
-            <div id="personal-settings">
-              <button className="float-right btn">...</button>
-              <button className="float-right btn">
-                <div
-                  style={{
-                    fontSize: "1.8rem",
-                    color: "white",
-                    position: "relative",
-                    top: "0.51rem"
-                  }}
-                >
-                  {" "}
-                  &#128929;
-                </div>
-              </button>
+        {this.state.yourself && (
+          <div id="loggedUser" className="card">
+            <div className="card-body">
+              <div id="personal-settings">
+                <IoIosContact
+                  className="float-left rounded-circle m-1"
+                  size={45}
+                />
+                <div className="userName">{this.state.yourself.userName}</div>
+                {/* <div className="buttons">
+                  <button className="float-right btn">
+                    <div
+                      style={{
+                        fontSize: "1.8rem",
+                        color: "white",
+                        position: "relative",
+                        top: "0.51rem"
+                      }}
+                    >
+                      {" "}
+                      &#128929;
+                    </div>
+                  </button>
+                  <button className="float-right btn">...</button>
+                </div> */}
+              </div>
             </div>
           </div>
-        </div>
+        )}
+        {this.state.loggedUsers.map((user, i) => (
+          <div id="loggedUser" className="card">
+            <div className="card-body">
+              <div id="personal-settings">
+                <IoIosContact
+                  className="float-left rounded-circle m-1"
+                  size={45}
+                />
+                <div className="userName">{user}</div>
+                {/* <div className="buttons">
+              
+                  <button className="float-right btn">
+                    <div
+                      style={{
+                        fontSize: "1.8rem",
+                        color: "white",
+                        position: "relative",
+                        top: "0.51rem"
+                      }}
+                    >
+                      {" "}
+                      &#128929;
+                    </div>
+                  </button>
+                  <button className="float-right btn">...</button>
+                </div> */}
+              </div>
+            </div>
+          </div>
+        ))}
 
-        <User />
 
       </div>
     );
