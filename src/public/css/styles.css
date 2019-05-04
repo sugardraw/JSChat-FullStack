@@ -6964,23 +6964,43 @@ input[value="Register"] {
   background-color: #226bcd !important; }
 
 /**
+users
+*/
+.rounded-circle {
+  color: white; }
+
+/**
 chatroom
 */
 .card {
   background-color: #8b90b9; }
 
+.card-body {
+  padding: 1.7rem; }
+
 #loggedUser {
   background-color: #9dd1ff; }
 
-#personal-settings button {
-  font-size: 1.8rem;
-  color: white;
-  background-color: #9dd1ff;
-  position: relative;
-  top: 0rem;
-  margin-left: 0.8rem; }
-  #personal-settings button:hover {
-    background-color: #ffc107 !important; }
+#personal-settings {
+  display: flex;
+  justify-content: space-between;
+  align-items: center; }
+  #personal-settings .userName {
+    font-size: 1.3em;
+    margin-left: -0.3em; }
+  #personal-settings .buttons {
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    margin-top: -0.7em; }
+  #personal-settings button {
+    font-size: 1.6rem;
+    color: white;
+    background-color: #9dd1ff;
+    position: relative;
+    margin-left: 0.8rem; }
+    #personal-settings button:hover {
+      background-color: #ffc107 !important; }
 
 /**
 *

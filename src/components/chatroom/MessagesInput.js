@@ -36,7 +36,6 @@ class MessagesInput extends Component {
 
   handleSubmit = e => {
     console.log("e.type", typeof e.type, e.type, e.target.type);
-    this.socket.emit("chat:typing", this.props.data);
     const msgBody = e.target.value;
 
     if (e.keyCode === 13 && msgBody) {

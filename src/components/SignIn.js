@@ -3,6 +3,7 @@ import axios from "axios";
 import ChatRoom from "./chatroom/ChatRoom";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import PropTypes from "prop-types";
+import io from "socket.io-client";
 
 class SignIn extends Component {
   constructor() {
@@ -28,13 +29,19 @@ class SignIn extends Component {
         })
 
         .then(data => {
-          data.token
-            ? this.setState({
-                token: data.token
-              })
-            : null;
-
-          sessionStorage.setItem("data", JSON.stringify(data));
+          if (data.token) {
+            this.setState({
+              token: data.token
+            });
+            sessionStorage.setItem("data", JSON.stringify(data));
+            this.socket = io("/");
+            this.socket.emit("login", {
+              userName: data.userName,
+              token: data.token
+            });
+          } else {
+            return null;
+          }
         })
         .catch(function(error) {
           console.log("error:", error);

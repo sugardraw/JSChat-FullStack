@@ -44,7 +44,6 @@ body {
 *
 *
 */
-
 input[value="Register"] {
   background-color: rgb(255, 234, 236);
   color: #226bcd !important;
@@ -54,22 +53,48 @@ input[value="Register"] {
 }
 
 /**
+users
+*/
+
+.rounded-circle {
+  color: white;
+}
+
+/**
 chatroom
 */
 .card {
   background-color: #8b90b9;
+}
+.card-body {
+  padding: 1.7rem;
 }
 #loggedUser {
   background-color: #9dd1ff;
 }
 
 #personal-settings {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .userName {
+    font-size: 1.3em;
+    margin-left: -0.3em;
+  }
+
+  .buttons {
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    margin-top: -0.7em;
+  }
+
   button {
-    font-size: 1.8rem;
+    font-size: 1.6rem;
     color: rgb(255, 255, 255);
     background-color: #9dd1ff;
     position: relative;
-    top: 0rem;
     margin-left: 0.8rem;
     &:hover {
       background-color: #ffc107 !important;
@@ -174,7 +199,7 @@ chatroom
   div b {
     color: #898ebe;
   }
-  div hr{
+  div hr {
     margin-top: -2px;
   }
 }
@@ -199,7 +224,7 @@ chatroom
   div b {
     color: #898ebe;
   }
-  div hr{
+  div hr {
     margin-top: -2px;
   }
 }

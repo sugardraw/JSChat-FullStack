@@ -2,9 +2,9 @@ import React, { Component } from "react";
 import Header from "./Header";
 
 import MessagesInput from "./MessagesInput";
-import PostsBoard from "./PostsBoard";
+
 import Users from "./Users";
-import axios from "axios";
+
 import ReactCSSTransitionGroup from "react-addons-css-transition-group"; // ES6
 
 class ChatRoom extends Component {
