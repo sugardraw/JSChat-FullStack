@@ -6,16 +6,18 @@ class Header extends Component {
     return (
       <div className="header shadow">
         <div id="logo">
-          <img
-            className="m-2"
-            width="60"
-            height="60"
-            src="./images/chat.svg"
-            alt="logo"
-          />
-          <span>
-            [FullStack].<em className="text-success">Chat</em>
-          </span>
+          <Link to="/">
+            <img
+              className="m-2"
+              width="60"
+              height="60"
+              src="./images/chat.svg"
+              alt="logo"
+            />
+            <span>
+              [FullStack].<em className="text-success">Chat</em>
+            </span>
+          </Link>
 
           <div className="window-buttons float-right">
             <Link to="/signup">

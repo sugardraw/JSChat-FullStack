@@ -6939,6 +6939,13 @@ body {
     font-size: 1.5rem;
     color: #226bcd; }
 
+.jumbotron {
+  margin-top: 10em !important; }
+  .jumbotron .display-4 {
+    color: #8B90B9; }
+  .jumbotron .lead {
+    color: #8B90B9; }
+
 .window-buttons {
   margin: 0.62rem 1.7rem 0 0; }
   .window-buttons button {
@@ -6956,6 +6963,10 @@ body {
 *
 *
 */
+#signup-wrapper {
+  max-width: 800px !important;
+  padding: 3em; }
+
 input[value="Register"] {
   background-color: #ffeaec;
   color: #226bcd !important; }

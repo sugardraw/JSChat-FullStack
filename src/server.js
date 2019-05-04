@@ -39,8 +39,8 @@ const server = http.createServer(app);
 const io = socketIo(server);
 require("./sockets.js")(io);
 
-// app.set("port", process.env.PORT || 8080);
-app.set("port", process.env.PORT);
+app.set("port", process.env.PORT || 8080);
+// app.set("port", process.env.PORT);
 
 
 app.use(

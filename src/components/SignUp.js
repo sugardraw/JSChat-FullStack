@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import Header from './Header';
 
 import axios from "axios";
 
@@ -54,8 +55,9 @@ class SingUp extends Component {
   render() {
     console.log(this.state.response);
     return (
-      <div className="container w-25">
-        <div className="mx-auto mt-5 pt-5">
+      <div className="container-fluid m-0 p-0">
+          <Header />
+        <div id="signup-wrapper" className="mx-auto mt-5 pt-5">
           <form
             method="POST"
             action="/registration"

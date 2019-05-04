@@ -4,6 +4,8 @@ import ChatRoom from "./chatroom/ChatRoom";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import io from "socket.io-client";
+import Header from './Header';
+
 
 class SignIn extends Component {
   constructor() {
@@ -43,7 +45,7 @@ class SignIn extends Component {
             return null;
           }
         })
-        .catch(function(error) {
+        .catch(function (error) {
           console.log("error:", error);
         });
     } else {
@@ -77,12 +79,14 @@ class SignIn extends Component {
       }
       return (
         <div className="container">
+
           <div id="loader-icon" />
         </div>
       );
     } else {
       return (
-        <div className="container">
+        <div className="container-fluid m-0 p-0">
+          <Header />
           <div className="row mx-auto mt-5 pt-5">
             <form
               className="mx-auto"
