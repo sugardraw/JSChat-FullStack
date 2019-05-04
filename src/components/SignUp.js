@@ -24,13 +24,13 @@ class SingUp extends Component {
         });
         axios
           .post("/registration", this.state)
-          .then(function(response) {
+          .then(function (response) {
             console.log("response from server", response);
             setTimeout(() => {
               window.location.replace("http://localhost:8080/signin");
             }, 3000);
           })
-          .catch(function(error) {
+          .catch(function (error) {
             console.log("error:", error);
           });
       } else {
@@ -53,8 +53,8 @@ class SingUp extends Component {
 
   render() {
     return (
-      <div className="container">
-        <div className="row w-50 mx-auto mt-5 pt-5">
+      <div className="container w-25">
+        <div className="mx-auto mt-5 pt-5">
           <form
             method="POST"
             action="/registration"

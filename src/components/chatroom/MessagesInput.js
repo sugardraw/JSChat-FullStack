@@ -12,6 +12,7 @@ class MessagesInput extends Component {
 
   componentDidMount() {
     this.socket = io("/");
+    console.log(this.socket)
     this.socket.on("message", message => {
       this.setState({
         messages: [message, ...this.state.messages]
@@ -32,6 +33,7 @@ class MessagesInput extends Component {
     }
   };
   render() {
+    console.log(this.state.messages)
     const  messages  = this.state.messages.map((message, i)=>{
       return(
         <div key={i}>
@@ -42,6 +44,7 @@ class MessagesInput extends Component {
     })
 
     return (
+
       <div className="m-2 p-2 mt-5 d-flex flex-fill flex-column align-items-center">
         <div className="postboard col-md-9 ">{messages}</div>
 

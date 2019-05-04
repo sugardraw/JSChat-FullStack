@@ -59,7 +59,7 @@ app.set("port", process.env.PORT || 8080);
  * */
 app.use(
   bodyParser.urlencoded({
-    extended: false
+    extended: true
   })
 );
 app.use(bodyParser.json());
@@ -68,7 +68,7 @@ app.use(require("./routes/index"));
 app.use(morgan("dev"));
 
 app.use(webpackDevMiddleware(webpack(webpackConfig)));
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: true }));
 
 // set static files
 
