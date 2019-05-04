@@ -75,12 +75,12 @@ chatroom
 
 #personal-settings {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: center;
 
   .userName {
     font-size: 1.3em;
-    margin-left: -0.3em;
+    margin-left: 1.7em;
   }
 
   .buttons {

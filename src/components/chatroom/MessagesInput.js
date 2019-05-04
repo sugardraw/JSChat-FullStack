@@ -140,7 +140,7 @@ class MessagesInput extends Component {
               type="text"
               placeholder="Write your message..."
             />
-            <div
+            {/* <div
               style={{
                 textAlign: "center",
                 color: "white",
@@ -154,7 +154,7 @@ class MessagesInput extends Component {
               }}
             >
               <FaPaperclip size={19} />
-            </div>
+            </div> */}
             <div
               style={{
                 textAlign: "center",
