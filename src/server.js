@@ -16,7 +16,7 @@ const webpack = require("webpack");
 //setting log colors
 var colors = require("colors");
 
-mongoose.connect(
+mongoose.connect(process.env.MONGODB_URI ||
   "mongodb://localhost:27017/JSChatDataBase",
   { useNewUrlParser: true }
 );
