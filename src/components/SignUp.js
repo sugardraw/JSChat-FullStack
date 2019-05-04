@@ -26,7 +26,7 @@ class SingUp extends Component {
           .post("/registration", this.state)
           .then(function(response) {
               setTimeout(() => {
-                window.location.replace("http://localhost:8080/signin");
+                window.location.replace("https://js-socketio-chat.herokuapp.com/signup");
               }, 2500);
             
           })
